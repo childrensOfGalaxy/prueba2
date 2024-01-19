@@ -70,5 +70,5 @@ $stream = $ftp.GetRequestStream()
 $stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
 $stream.Close()
 
-
+Remove-Item  $perfilUsuario+"\Desktop\prueba.txt"
 
