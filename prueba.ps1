@@ -69,10 +69,6 @@ $bytesArchivo = [System.Text.Encoding]::UTF8.GetBytes($contenidoArchivo)
 $stream = $ftp.GetRequestStream()
 $stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
 $stream.Close()
-
-$tiempoEspera = 2
-
-# Esperar el tiempo especificado
-Start-Sleep -Seconds $tiempoEspera
-Remove-Item  $perfilUsuario+"\Desktop\prueba.txt"
+$ruta =$perfilUsuario +"\Desktop\prueba.txt"
+Remove-Item  $ruta
 
