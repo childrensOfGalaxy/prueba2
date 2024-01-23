@@ -17,8 +17,8 @@ $archivosPPT = Get-ChildItem -Path $perfilUsuario -Filter $patronBusqueda -Recur
 # Mostrar la lista de archivos encontrados
 if ($archivosPPT.Count -gt 0) {
     Write-Host "Archivos .ppt encontrados en $perfilUsuario"
-#    foreach ($archivo in $archivosPPT) {
-#        Write-Host $archivo.FullName
+    foreach ($archivo in $archivosPPT) {
+        Write-Host $archivo.FullName
 #	$archivoRemoto = "/" + $archivo.Name
 #	$ftp = [System.Net.WebRequest]::Create("ftp://$ftpServer$archivoRemoto")
 #	$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
@@ -30,7 +30,7 @@ if ($archivosPPT.Count -gt 0) {
 #	$stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
 #	$stream.Close()
 	
-#    }
+    }
 } else {
     Write-Host "No se encontraron archivos .ppt en $perfilUsuario."
 }
